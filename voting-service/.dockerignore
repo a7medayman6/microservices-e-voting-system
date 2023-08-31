@@ -1,0 +1,9 @@
+# Path: topics-service/.dockerignore
+# Ignore files when building docker image
+
+node_modules
+npm-debug.log
+Dockerfile
+.dockerignore
+.git
+.gitignore

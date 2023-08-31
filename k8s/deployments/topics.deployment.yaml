@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: e-voting-topics-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: e-voting-topics-service
+  template:
+    metadata:
+      labels:
+        app: e-voting-topics-service
+    spec:
+      containers:
+        - name: e-voting-topics-service
+          image: a7medayman6/e-voting-topics-service
+          # Add resource limiting
+          resources:
+            limits:
+              cpu: 100m
+              memory: 100Mi
+            requests:
+              cpu: 100m
+              memory: 100Mi
+          # Add environment variables
+          env:
+            - name: PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: app-config
+                  key: APP_PORT
+            - name: TOPICS_SERVICE
+              valueFrom:
+                configMapKeyRef:
+                  name: app-config
+                  key: TOPICS_SERVICE
+            - name: VOTING_SERVICE
+              valueFrom:
+                configMapKeyRef:
+                  name: app-config
+                  key: VOTING_SERVICE
+            - name: VOTERS_SERVICE
+              valueFrom:
+                configMapKeyRef:
+                  name: app-config
+                  key: VOTERS_SERVICE
+            - name: MONGODB_URI
+              valueFrom:
+                configMapKeyRef:
+                  name: app-config
+                  key: TOPICS_MONGODB_URI
+          ports:
+            - containerPort: 3000
+# MONGODB_URI='mongodb://localhost:27017/e-voting-voting-service'

@@ -1,0 +1,57 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: e-voting-voting-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: e-voting-voting-service
+  template:
+    metadata:
+      labels:
+        app: e-voting-voting-service
+    spec:
+      containers:
+        - name: e-voting-voting-service
+          image: a7medayman6/e-voting-voting-service
+          resources:
+            limits:
+              cpu: 100m
+              memory: 100Mi
+            requests:
+              cpu: 100m
+              memory: 100Mi
+          env:
+            - name: PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: app-config
+                  key: APP_PORT
+            - name: TOPICS_SERVICE
+              valueFrom:
+                configMapKeyRef:
+                  name: app-config
+                  key: TOPICS_SERVICE
+            - name: VOTING_SERVICE
+              valueFrom:
+                configMapKeyRef:
+                  name: app-config
+                  key: VOTING_SERVICE
+            - name: VOTERS_SERVICE
+              valueFrom:
+                configMapKeyRef:
+                  name: app-config
+                  key: VOTERS_SERVICE
+            - name: MONGODB_URI
+              valueFrom:
+                configMapKeyRef:
+                  name: app-config
+                  key: VOTINGS_MONGODB_URI
+            - name: RABBITMQ_URI
+              valueFrom:
+                configMapKeyRef:
+                  name: app-config
+                  key: RABBITMQ_URI
+          ports:
+            - containerPort: 3000

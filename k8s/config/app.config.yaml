@@ -1,0 +1,16 @@
+apiVersion: v1
+
+kind: ConfigMap
+
+metadata:
+  name: app-config
+data:
+  TOPICS_MONGODB_URI: mongodb://192.168.11.101:27017/e-voting-topics-service
+  VOTERS_MONGODB_URI: mongodb://192.168.11.101:27017/e-voting-voters-service
+  VOTINGS_MONGODB_URI: mongodb://192.168.11.101:27017/e-voting-votings-service
+  TOPICS_SERVICE: http://e-voting-topics-service:3000/api/v1/topics
+  VOTING_SERVICE: http://e-voting-voting-service:3000/api/v1/votes
+  VOTERS_SERVICE: http://e-voting-voters-service:3000/api/v1/voters
+  RABBITMQ_URI: amqp://rabbitmq-service:5673
+  APP_PORT: "3000"
+  
