@@ -45,6 +45,12 @@ This is a simple microservices voting system. It is composed of 3 microservices:
         - **POST** `/voters`: Create a new voter, and return the voter id.
         - **GET** `/voters/{voterId}`: Get a voter by id, to validate the voter id.
 
+- **Worker Service**
+    - **Description**: A service that takes votes from the message broker and updates the topics database to have the result, it should work as a consumer to the votes channel on RabbitMQ
+
+- **RabbitMQ Message Broker**
+    - **Description**: A Message broker to share the votes between services.
+    
 - **Centeralized Logging Service**
     - **Description**: A service that allows to log all the requests and responses of the other services.
     - **Port**: 8083
