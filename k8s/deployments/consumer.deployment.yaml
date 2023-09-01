@@ -1,0 +1,54 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: e-voting-consumer-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: e-voting-consumer-service
+  template:
+    metadata:
+      labels:
+        app: e-voting-consumer-service
+    spec:
+      containers:
+        - name: e-voting-consumer-service
+          image: a7medayman6/e-voting-consumer-service
+          # Add resource limiting
+          resources:
+            limits:
+              cpu: 100m
+              memory: 100Mi
+            requests:
+              cpu: 100m
+              memory: 100Mi
+          # Add environment variables
+          env:
+            - name: MONGODB_URI
+              valueFrom:
+                configMapKeyRef:
+                  name: app-config
+                  key: CONSUMER_MONGODB_URI
+            - name: DATABASE_NAME
+              valueFrom:
+                configMapKeyRef:
+                  name: app-config
+                  key: CONSUMER_MONGODB_DB
+            - name: COLLECTION_NAME
+              valueFrom:
+                configMapKeyRef:
+                  name: app-config
+                  key: CONSUMER_COLLECTION_NAME
+            - name: RABBITMQ_URI
+              valueFrom:
+                configMapKeyRef:
+                  name: app-config
+                  key: CONSUMER_RABBMITMQ_URI
+            - name: QUEUE_NAME
+              valueFrom:
+                configMapKeyRef:
+                  name: app-config
+                  key: CONSUMER_QUEUE_NAME
+          ports:
+            - containerPort: 5000

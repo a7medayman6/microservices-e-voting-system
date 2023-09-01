@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 const votersSchema = new mongoose.Schema(
     {
         name: { type: String, required: true },
-        nationalId: { type: String, required: true, unique: true },
+        voterId: { type: String, required: true, unique: true },
         status: { type: String, default: "active" },
     },
 

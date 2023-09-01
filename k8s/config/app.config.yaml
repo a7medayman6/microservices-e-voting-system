@@ -5,12 +5,16 @@ kind: ConfigMap
 metadata:
   name: app-config
 data:
-  TOPICS_MONGODB_URI: mongodb://192.168.11.101:27017/e-voting-topics-service
-  VOTERS_MONGODB_URI: mongodb://192.168.11.101:27017/e-voting-voters-service
-  VOTINGS_MONGODB_URI: mongodb://192.168.11.101:27017/e-voting-votings-service
+  TOPICS_MONGODB_URI: mongodb://192.168.11.103:27017/e-voting-topics-service
+  VOTERS_MONGODB_URI: mongodb://192.168.11.103:27017/e-voting-voters-service
+  VOTINGS_MONGODB_URI: mongodb://192.168.11.103:27017/e-voting-votings-service
   TOPICS_SERVICE: http://e-voting-topics-service:3000/api/v1/topics
   VOTING_SERVICE: http://e-voting-voting-service:3000/api/v1/votes
   VOTERS_SERVICE: http://e-voting-voters-service:3000/api/v1/voters
   RABBITMQ_URI: amqp://rabbitmq-service:5673
   APP_PORT: "3000"
-  
+  CONSUMER_MONGODB_URI: mongodb://192.168.11.103:27017/
+  CONSUMER_MONGODB_DB: e-voting-topics-service
+  CONSUMER_COLLECTION_NAME: topics
+  CONSUMER_RABBMITMQ_URI: rabbitmq-service:5673
+  CONSUMER_QUEUE_NAME: topics

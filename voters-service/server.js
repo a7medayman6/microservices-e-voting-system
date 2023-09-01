@@ -8,6 +8,9 @@ const db = require('./config/db');
 
 const app = express();
 
+// enable cors
+app.use(cors({origin: '*'}));
+
 app.use(express.json());
 
 // parse requests of content-type - application/json
@@ -18,10 +21,6 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(bodyParser.json());
 
-// enable cors
-app.use(cors({
-    origin: 'http://localhost:3001'
-}));
 
 // loggers
 morgan.token('body', (req, res) => JSON.stringify(req.body));

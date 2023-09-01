@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: rabbitmq
-          image: rabbitmq:3-management-alpine
+          image: rabbitmq:alpine
           # Add resource limiting
           resources:
             limits:
