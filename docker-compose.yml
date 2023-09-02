@@ -1,0 +1,9 @@
+version: '3.3'
+
+services:
+  mongo-db:
+    image: mongo
+    restart: always
+    network_mode: host
+    volumes:
+      - /srv/mongo/mongodb/db:/data/:rw
